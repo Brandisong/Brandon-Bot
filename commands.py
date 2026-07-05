@@ -58,6 +58,7 @@ def random_quran() -> str:
         return "Error: Quran files not found :("
     
 
+# Gives a random word from the list of valid wordle words
 def wordle() -> str:
     WORDLE_PATH = Path("./assets/wordle_words.txt")
     return get_random_line(WORDLE_PATH)

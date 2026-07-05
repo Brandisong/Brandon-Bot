@@ -1,7 +1,8 @@
 import discord
 from os import getenv
 from dotenv import load_dotenv
-import commands # My own command library
+import commands # My own command library - for most mid-sized commands
+import ai # Also my own library - for LLM prompting
 
 # Load token
 load_dotenv()
@@ -78,6 +79,11 @@ async def on_message(message):
     # !wordle - Returns a random valid wordle word
     if message.content.startswith("!wordle"):
         await message.channel.send(commands.wordle())
+
+    # # !ask_brandon - Prompts a small local LLM (disabled as it's a work in progress)
+    # if message.content.startswith("!ask_brandon"):
+    #     prompt = message.content[12:]
+    #     await message.channel.send(ai.ask_brandon(prompt))
 
 
 # Run the bot
