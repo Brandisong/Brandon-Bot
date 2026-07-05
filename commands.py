@@ -1,13 +1,16 @@
 from pathlib import Path
 from random import randint
 
-# Gets a quote from a list
-def daily_wisdom() -> str:
-    QUOTE_PATH = Path("./assets/quotes.txt")
-    
-    if QUOTE_PATH.exists():
+# Envelop text in code block for formatting
+def code_block(quote: str) -> str:
+    return "```" + quote + "```"
+
+
+# Get a random line from a single text file
+def get_random_line(path: Path) -> str:
+    if path.exists():
         # Make a list of all the lines in the file
-        file = open(QUOTE_PATH, "r")
+        file = open(path, "r")
         quotes = []
 
         for line in file:
@@ -15,10 +18,16 @@ def daily_wisdom() -> str:
         file.close() 
         
         # Choose a random quote and return it
-        return "```" + quotes[randint(0, len(quotes)-1)] + "```"
+        return quotes[randint(0, len(quotes)-1)]
     
     else:
         return "Error: quotes file not found :("
+
+
+# Gives a random quote from a custom miscellaneous list
+def daily_wisdom() -> str:
+    QUOTE_PATH = Path("./assets/quotes.txt")
+    return code_block(get_random_line(QUOTE_PATH))
 
 
 # Gives a random fortune like a magic 8-ball
@@ -31,6 +40,7 @@ def fortune() -> str:
     return fortune_list[randint(0, len(fortune_list)-1)]
 
 
+# Gives a random single verse from the Quran
 def random_quran() -> str:
     QURAN_PATH = Path("./assets/quran")
 
@@ -42,4 +52,12 @@ def random_quran() -> str:
         file = open(random_verse_path, 'r')
         response = file.read()
         file.close()
-        return "Surah " + random_verse_path.name[:-4] + '\n' + "```" + response + "```"
+        return "Surah " + random_verse_path.name[:-4] + '\n' + code_block(response)
+
+    else:
+        return "Error: Quran files not found :("
+    
+
+def wordle() -> str:
+    WORDLE_PATH = Path("./assets/wordle_words.txt")
+    return get_random_line(WORDLE_PATH)

@@ -8,7 +8,7 @@ load_dotenv()
 TOKEN = getenv("DISCORD_TOKEN")
 
 # Help command list
-help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune", "!random_quran"]
+help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune", "!random_quran", "!wordle"]
 help_list.sort()
 
 # Set up the client
@@ -34,6 +34,10 @@ async def on_message(message):
     if message.author == client.user:
         return
     
+    # Attempted command - log message
+    print(f"{message.author}: {message.content}")
+
+    # COMMANDS
     # !help - List possible commands
     if message.content.startswith("!help"):
         response = "Possible commands:\n```"
@@ -70,6 +74,10 @@ async def on_message(message):
     # !random_quran - Returns a random Quran verse
     if message.content.startswith("!random_quran"):
         await message.channel.send(commands.random_quran())
+    
+    # !wordle - Returns a random valid wordle word
+    if message.content.startswith("!wordle"):
+        await message.channel.send(commands.wordle())
 
 
 # Run the bot
