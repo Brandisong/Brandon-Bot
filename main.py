@@ -8,7 +8,7 @@ load_dotenv()
 TOKEN = getenv("DISCORD_TOKEN")
 
 # Help command list
-help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune"]
+help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune", "!random_quran"]
 help_list.sort()
 
 # Set up the client
@@ -66,6 +66,10 @@ async def on_message(message):
     # !fortune - Returns a random fortune
     if message.content.startswith("!fortune"):
         await message.channel.send(commands.fortune())
+
+    # !random_quran - Returns a random Quran verse
+    if message.content.startswith("!random_quran"):
+        await message.channel.send(commands.random_quran())
 
 
 # Run the bot

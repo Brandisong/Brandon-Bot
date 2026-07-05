@@ -3,7 +3,7 @@ from random import randint
 
 # Gets a quote from a list
 def daily_wisdom() -> str:
-    QUOTE_PATH = Path("./quotes.txt")
+    QUOTE_PATH = Path("./assets/quotes.txt")
     
     if QUOTE_PATH.exists():
         # Make a list of all the lines in the file
@@ -29,3 +29,17 @@ def fortune() -> str:
     
     # Choose a random quote and return it
     return fortune_list[randint(0, len(fortune_list)-1)]
+
+
+def random_quran() -> str:
+    QURAN_PATH = Path("./assets/quran")
+
+    if QURAN_PATH.exists():
+        verse_list = list(QURAN_PATH.glob("*.txt"))
+        
+        # Pick a random verse, read it, and respond with it
+        random_verse_path = verse_list[randint(0, len(verse_list)-1)]
+        file = open(random_verse_path, 'r')
+        response = file.read()
+        file.close()
+        return "Surah " + random_verse_path.name[:-4] + '\n' + "```" + response + "```"
