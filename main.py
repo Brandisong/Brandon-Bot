@@ -2,20 +2,20 @@ import discord
 from os import getenv
 from dotenv import load_dotenv
 import commands # My own command library - for most mid-sized commands
-import ai # Also my own library - for LLM prompting
+# import ai # Also my own library - for LLM prompting
 
 # Load token
 load_dotenv()
 TOKEN = getenv("DISCORD_TOKEN")
 
 # Help command list
-help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune", "!random_quran", "!wordle"]
+help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune", "!random_quran", "!wordle", "!wordle_hidden"]
 help_list.sort()
 
 # Set up the client
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
+client = discord.Client(intents=intents, activity=discord.Game(name="Use !help for commands"))
 
 
 # EVENTS
@@ -52,32 +52,36 @@ async def on_message(message):
         await message.channel.send("Hello!")
 
     # !brandon - Say Brandon
-    if message.content.startswith("!brandon"):
+    elif message.content.startswith("!brandon"):
         await message.channel.send("Brandon")
 
     # !joanna - Say heart to Joanna
-    if message.content.startswith("!joanna"):
+    elif message.content.startswith("!joanna"):
         await message.channel.send(":heart:")
     
     # !echo - Repeat last message
-    if message.content.startswith("!echo"):
+    elif message.content.startswith("!echo"):
         response: str = message.content[5:]
         await message.channel.send(response)
     
     # !daily_wisdom - Say a random quote
-    if message.content.startswith("!daily_wisdom"):
+    elif message.content.startswith("!daily_wisdom"):
         await message.channel.send(commands.daily_wisdom())
     
     # !fortune - Returns a random fortune
-    if message.content.startswith("!fortune"):
+    elif message.content.startswith("!fortune"):
         await message.channel.send(commands.fortune())
 
     # !random_quran - Returns a random Quran verse
-    if message.content.startswith("!random_quran"):
+    elif message.content.startswith("!random_quran"):
         await message.channel.send(commands.random_quran())
     
+    # !wordle_hidden - Same as above but hides it as a spoiler
+    elif message.content.startswith("!wordle_hidden"):
+        await message.channel.send("||" + commands.wordle() + "||")
+    
     # !wordle - Returns a random valid wordle word
-    if message.content.startswith("!wordle"):
+    elif message.content.startswith("!wordle"):
         await message.channel.send(commands.wordle())
 
     # # !ask_brandon - Prompts a small local LLM (disabled as it's a work in progress)
