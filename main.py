@@ -85,9 +85,13 @@ async def on_message(message):
         await message.channel.send(commands.wordle())
 
     # # !ask_brandon - Prompts a small local LLM (disabled as it's a work in progress)
-    # if message.content.startswith("!ask_brandon"):
+    # elif message.content.startswith("!ask_brandon"):
     #     prompt = message.content[12:]
     #     await message.channel.send(ai.ask_brandon(prompt))
+
+    # !aura - Store and display aura points
+    elif message.content.startswith("!aura"):
+        await message.channel.send(commands.aura(message.content))
 
 
 # Run the bot
