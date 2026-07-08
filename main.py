@@ -9,7 +9,8 @@ load_dotenv()
 TOKEN = getenv("DISCORD_TOKEN")
 
 # Help command list
-help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune", "!random_quran", "!wordle", "!wordle_hidden"]
+help_list = ["!help", "!hello", "!echo [message]", "!daily_wisdom", "!fortune", "!random_quran", "!wordle", "!wordle_hidden",
+             "!aura [@user] [optional: points to add]"]
 help_list.sort()
 
 # Set up the client

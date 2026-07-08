@@ -73,7 +73,7 @@ def wordle() -> str:
 def aura(content: str) -> str:
     
     # Get user id and aura points from message
-    mo = re.search(r"!aura <@(\d+)> (\d+)", content)
+    mo = re.search(r"!aura <@(\d+)> (-?\d+)", content)
     
     # If mo is invalid, search with id and use 0 as the aura to add
     if mo == None:
